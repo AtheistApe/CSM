@@ -1,0 +1,138 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 253}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 14}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\pmb{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+\renewcommand{\deg}{\ensuremath{{}^\circ}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+\newcommand{\proj}[2]{\ensuremath{\text{proj}_{\v{#2}}\v{#1}}}
+
+\usepackage{enumitem}
+
+\begin{document}
+\section*{Arclength and the Arclength function}
+\subsection*{Arclength}
+Imagine a car moving at a \emph{constant} speed $\|\vec{v}(t)\|$ along a curvy road. The distance it travels during a time interval $\Delta t$ is $\|\vec{v}(t)\|\Delta t$. This distance measures the length of road $\Delta s$ travelled during the time interval $\Delta t$.\\[1.5ex] Now imagine the car moving at a \emph{continuously varying} speed $\|\vec{v}(t)\|$ over a time interval $a \leq t \leq b$. Over a very small time interval $dt$ at some particular time $t$ within this interval, the car's speed is the (approximately) constant speed $\|\vec{v}(t)\|$. Therefore, the distance $ds$ it travels over this time interval is $\|\vec{v}(t)\| dt$. Summing up (integrating) all these distances over the whole time interval $[a, b]$, we get the length of road travelled over this time interval.
+  \begin{equation*}
+    s = \int_a^b \|\vec{v}(t)\|\;dt
+  \end{equation*}
+  where $s$ is the length of road (arc-length of the curve) travelled over the time interval $[a, b]$.
+\subsubsection*{Problems}
+  \begin{enumerate}
+    \item Let $\vec{r}(t) = \lv{t, -\frac{3}{4} t + 3}$, for $0\leq t\leq 4$ be the straight line segment $L$ from $(0,3)$ to $(4,0)$.
+    \begin{enumerate}
+      \item Using geometry, find the length of $L$.
+      \item Recalling that $\vec{v}(t) = \vec{r}'(t)$, find the length of $L$ using the arclength integral above. Do the two answers agree?
+    \end{enumerate}
+    \item The same straight line segment $L$ from $(0,3)$ to $(4,0)$ can also be described by the vector-valued function $\vec{r}(t) = \lv{t^2/4, -3t^2/16 + 3}$, for $0\leq t\leq 4$ (how can you verify this?) With this parameterization for $L$, what is the value of the arclength integral? Does this answer agree with previous answers for the length of $L$? If not, why not?
+    \item The same straight line segment $L$ from $(0,3)$ to $(4,0)$ can also be described by the vector-valued function $\vec{r}(t) = \lv{4\sin t, -3\sin t + 3}$, for $0\leq t\leq \pi/2$ (how can you verify this?) With this parameterization for $L$, what is the value of the arclength integral? Does this answer agree with previous answers for the length of $L$? If not, why not?
+    \item The same straight line segment $L$ from $(0,3)$ to $(4,0)$ can also be described by the vector-valued function $\vec{r}(t) = \lv{4\sin t, -3\sin t + 3}$, for $0\leq t\leq \pi$ (how can you verify this?) With this parameterization for $L$, what is the value of the arclength integral? Does this answer agree with previous answers for the length of $L$? If not, why not?
+  \end{enumerate}
+  \newpage
+  \subsection*{Arclength function}
+  Let $\vec{r}(t)$ for $a\leq t\leq b$ define a curve $C$. We define the \emph{arclength function} $s(t)$, $a\leq t\leq b$ by the integral
+  \begin{equation*}
+    s(t) = \int_a^t \|\vec{r}'(\tau)\|\;d\tau
+  \end{equation*}
+  This function gives us the distance travelled along the curve $C$ (the length of the curve) over the time interval $[a, t]$.
+  \subsubsection*{Problems}
+  \begin{enumerate}
+    \item Let $\vec{r}(t) = \lv{t, -3t/4 + 3}$, for $0\leq t\leq 4$ be the straight line segment $L$ from $(0,3)$ to $(4,0)$. Find $s(t)$, then evaluate $s(1)$, $s(2)$, $s(3)$, and $s(4)$.
+    \item The same straight line segment $L$ from $(0,3)$ to $(4,0)$ can also be described by the vector-valued function $\vec{r}(t) = \lv{t^2/4, -3t^2/16 + 3}$, for $0\leq t\leq 4$. Find $s(t)$, then evaluate $s(1)$, $s(2)$, $s(3)$, and $s(4)$. How do these distances compare with the distances in the previous problem at the same times?
+  \end{enumerate}
+\end{document}
+Curve(m*abs(v) cos(θ)/k (1 - ℯ^(-k t / m)), m / k ((abs(v) sin(θ) + m g / k) (1 - ℯ^(-k t / m)) - g t), t, 0, 2π)

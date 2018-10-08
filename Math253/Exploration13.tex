@@ -1,0 +1,129 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 253}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 13}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\pmb{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+\renewcommand{\deg}{\ensuremath{{}^\circ}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+\newcommand{\proj}[2]{\ensuremath{\text{proj}_{\v{#2}}\v{#1}}}
+
+\usepackage{enumitem}
+
+\begin{document}
+\section*{The Calculus of Vector Valued Functions}
+Let $\v{r}: \mathbb{R}\to\mathbb{R}^n$ be a vector valued function defined as
+\begin{equation*}
+ \v{r}(t) = \lv{x_1(t), x_2(t),\ldots, x_n(t)},\quad\text{for } a\leq t\leq b
+\end{equation*}
+where $x_k(t)$, $k = 1,\ldots,n$ are differentiable and integrable scalar valued functions of $t$ over the interval $[a, b]$. If we interpret $t$ as time and $\v{r}(t)$ as a position vector to the point with coordinates $(x_1(t), x_2(t),\ldots,x_n(t))$, we can interpret the function $\v{r}(t)$ as the motion of an object along a ``space curve'' in $\mathbb{R}^n$.\\[1.5ex] We showed previously that the derivative $\v{r}'$ is obtained by differentiating each component function of $\v{r}$
+\begin{equation*}
+ \v{r}'(t) = \lv{x_1'(t), x_2'(t),\ldots, x_n'(t)}
+\end{equation*}
+Using the interpretation of $\v{r}(t)$ above, we also showed that the derivative $\v{r}'$ represents the \emph{velocity} vector of the moving object. It is a vector tangent to the path of motion (in the direction of motion) with magnitude equal to the speed of the object.\\[1.5ex]
+Similarly, we can obtain the integral of $\v{r}$ by integrating each component function of $\v{r}$
+\begin{equation*}
+ \int\v{r}(t)\;dt = \lv{\int x_1(t)\;dt, \int x_2(t)\;dt,\ldots, \int x_n(t)\;dt} + \v{C}
+\end{equation*}
+where $\v{C}\in\mathbb{R}^n$ is a constant vector.
+\subsection*{Problems}
+\begin{enumerate}
+ \item Let $\v{r}(t) = \lv{t^2, -2t, t+1}$. Find $\v{r}'(t)$ and $\int\v{r}(t)\;dt$.
+ \item Let $\v{r}(t) = \lv{\cos t, \sin t, t}$. Describe the curve $\v{r}(t)$. Find the velocity vector $\v{r}'(\pi/2)$ and use it to find the symmetric equation of the tangent line to the curve at time $t = \pi/2$. Note: The ``tangent line'' to a curve $\v{r}(t)$ at some point $\v{r}(t_0)$ is a line through that point with direction given by $\v{r}'(t_0)$.
+ \item Let $\v{r}_1(t) = \lv{t, 1 - t, 3 + t^2}$ and $\v{r}_2(t) = \lv{3 - t, t - 2, t}$ be two space curves in $\mathbb{R}^3$. Find the angle between the curves at the points where they intersect. The angle between the curves is the angle between tangent vectors to the curves at the point of intersection.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,134 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 253}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 15}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\pmb{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+\renewcommand{\deg}{\ensuremath{{}^\circ}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+\newcommand{\proj}[2]{\ensuremath{\text{proj}_{\v{#2}}\v{#1}}}
+
+\usepackage{enumitem}
+
+\begin{document}
+\section*{Reparameterizing $\pmb{r}(t)$ in Terms of Arc Length $s$}
+In exploration 14 we saw that the same curve $C$ can be described by many different vector valued functions $\pmb{r}(t)$; There are many different parameterizations of the same curve in terms of time $t$.\\[1.5ex] If we think of the curve $C$ as a road we are driving on, these different parameterizations of $C$ could be interpreted as different ways we could be driving on the road:
+\begin{itemize}
+ \item We could drive on the road at a constant speed.
+ \item We could drive really fast at the beginning then slow down near the end.
+ \item We could drive slow at the beginning, stop for a lunch break for a while, then drive really fast to make up for lost time.
+\end{itemize}
+Each of the many different ways we could drive on the road will put us at different locations (different coordinates $\pmb{r}(t)$) at a given time $t$ during our drive; Our location on the road at some time $t$ depends on \emph{how} we are driving on the road.\\[1.5ex] Suppose instead of determining our location (coordinates) on the road by our watch, we use the odometer (which measures how far we've travelled on the road). If we set the odometer to zero as we start our drive on the road and we drive some fixed distance $s$ along the road, we will always end up at the same location on the road no matter how we drive on that section of the road!\\[1.5ex] Parameterizing our position $\pmb{r}$ on the curve $C$ by how far $s$ we've travelled along $C$ gives an intrinsic measure of location independent of how we move along $C$.\\[1.5ex]
+In exploration 14 we defined the arc length function $s(t)$ as
+\begin{equation*}
+ s(t) = \int_a^t \|\pmb{r}'(\tau)\|\;d\tau, \quad a\leq t\leq b
+\end{equation*}
+This integral relates the distance $s$ travelled along the curve $C$ to the time $t$ moving along $C$. If we can solve this relation for $t$ in terms of $s$, getting $t(s)$, we can replace the $t$ parameter in the position function $\pmb{r}(t)$ with the expression $t(s)$ getting $\pmb{r}(t(s))$, thereby reparameterizing $\pmb{r}$ in terms of $s$ instead of $t$.
+\newpage
+\subsection*{Problems}
+For each parameterization of a curve $C$ given by the vector valued function $\pmb{r}(t)$
+\begin{itemize}
+ \item Find the arc length function $s(t)$, which gives the arc length $s$ as an expression in the time parameter $t$.
+ \item Solve the arc length expression for $t$ in terms of $s$, getting $t(s)$.
+ \item Reparameterize the curve $C$ in terms of its arclength $s$, getting $\pmb{r}(t(s))$.
+\end{itemize}
+\begin{enumerate}
+ \item $\pmb{r}(t) = \left\langle t, -\frac{3}{4}t + 3\right\rangle$, for $0\leq t \leq 4$; The straight line segment joining $(0,3)$ to $(4,0)$. Also, find $\pmb{r}(s = 4)$ and interpret its meaning.
+ \item $\pmb{r}(t) = \langle 4\sin t, -3\sin t + 3$, for $0\leq t\leq \pi/2$; The straight line segment joining $(0,3)$ to $(4,0)$.
+ \item $\pmb{r}(t) = \langle 5\cos t, 5\sin t\rangle$, for $0\leq t\leq 2\pi$; The circle of radius 5 centered at the origin. Also find $\pmb{r}(s = 5)$ and interpret its meaning.
+ \item $\pmb{r}(t) = \langle 5\cos t, 5\sin t, t\rangle$, for $0\leq t\leq 4\pi$; The helix of radius 5 with axis on the positive $z$ axis. Also find $\pmb{r}(s = 7)$ and interpret its meaning.
+\end{enumerate}
+\end{document}

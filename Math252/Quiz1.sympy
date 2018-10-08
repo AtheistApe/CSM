@@ -1,0 +1,4 @@
+import sympy
+import sympytex
+sympytex.openout('Quiz1')
+sympytex.endofdoc()

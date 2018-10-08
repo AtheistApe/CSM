@@ -1,0 +1,145 @@
+\documentclass[13pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 253}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exam 2}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\pmb{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+\renewcommand{\deg}{\ensuremath{{}^\circ}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+\newcommand{\proj}[2]{\ensuremath{\text{proj}_{\v{#2}}\v{#1}}}
+
+\usepackage{enumitem}
+
+\begin{document}
+Please work the problems below on the paper provided to you in a neat,
+clear and complete manner. Make it easy for me to grade.
+\begin{enumerate}
+ \item An objects velocity $\vec{v}$ at time $t$ seconds is given by $\v{v}(t) = \lv{1, 1-\cos t, -\sin t}$, for $t > 0$ seconds.
+       \begin{enumerate}
+        \item Find the position function $\v{r}(t)$, given that $\v{r}(0) = \lv{0,0,0}$.
+        \item Find the unit tangent vector $\v{\hat{T}}$ to $\v{r}(t)$ at time $t = \pi/2$.
+        \item Find the accelleration function $\v{a}(t)$.
+       \end{enumerate}
+ \item $\v{r}(t) = \lv{2t, \frac{4}{3}t^{3/2}, \frac{1}{2}t^2}$, for $t \geq 0$, is the vector position function of a curve.
+       \begin{enumerate}
+        \item Find the arc length function $s(t)$, for $t \geq 0$.
+        \item Find the length of the curve over the interval $0 \leq t \leq 6$. Hint: The answer is between 25 and 32.
+        \item What are the coordinates of the point, six units along the curve
+              from $\v{r}(0)$? Hint: Find $t$, when $s = 6$.
+        \item Find the curvature, $\kappa$, at $t = 1$
+       \end{enumerate}
+\end{enumerate}
+% \rule{\linewidth}{1pt}
+% %\newpage
+% In the formulas below, $\v{v}=\v{r}'$, $\v{a}=\v{r}''$, where $\v{r}(t)$ is the
+% vector position function. All vectors are functions of $t$, since $\v{r}(t)$ is a
+% function of $t$.
+% \begin{itemize}
+%  \item $\vec{T} = \dfrac{\vec{v}}{|\vec{v}|} \qquad \vec{N} = \dfrac{\vec{T}'}{|\vec{T}'|}
+%         \qquad \vec{B} = \vec{T} \times \vec{N}$.
+%  \item $\kappa =  \dfrac{|\v{T}'|}{|\v{v}|} = \dfrac{|\vec{v} \times
+%          \vec{a}|}{|\vec{v}|^3}$
+%  \item $\v{a} = a_{T}\v{T} + a_{N}\v{N}$, where:
+%        $\ds a_{T} = \frac{d}{dt} |\v{v}| = \frac{\v{v} \cdot \v{a}}{|\v{v}|}$
+%        \;\; and \;\;
+%        $\ds a_{N} = \kappa |\v{v}|^2 = \frac{|\v{v} \times \v{a}|}{|\v{v}|}$.
+%  \item $\ds L = \int_a^b |\vec{v}(t)|\;dt$.
+%  \item $\ds s(t) = \int_a^t |\vec{v}(u)|\;du$.
+%  \item $\text{grad}(f) = \nabla f$
+%  \item $\text{div}(\vec{F}) = \nabla\cdot\vec{F}$
+%  \item $\text{curl}(\vec{F}) = \nabla\times\vec{F}$
+% \end{itemize}
+\end{document}

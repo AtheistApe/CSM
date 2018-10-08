@@ -1,0 +1,132 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 253}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 9}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\langle #1 \rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\pmb{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+\renewcommand{\deg}{\ensuremath{{}^\circ}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+\newcommand{\proj}[2]{\ensuremath{\text{proj}_{\v{#2}}\v{#1}}}
+
+\usepackage{enumitem}
+
+\begin{document}
+\section*{The vector (``cross'') product}
+The vector (or ``cross'') product $\v{a}\times\v{b}$ of two non-collinear vectors $\v{a}, \v{b} \in\mathbb{R}^3$ is defined geometrically as the vector perpendicular to the plane containing vectors $\v{a}$ and $\v{b}$ in the direction given by the right-hand rule, \footnote{To use the right hand rule, you first have to hold up your right hand. Make sure it's not your left, or it won't work! Hold your index finger, middle finger and thumb so that they are all perpendicular to each other, like an $x$, $y$ and $z$ coordinate system. Now, rotate your hand so that your index finger points in the direction of vector $\v{a}$ and your middle finger points in the direction of vector $\v{b}$. Your thumb will point in the direction of the cross product $\v{a}\times\v{b}$} with $\|\v{a}\times\v{b}\|$ equal to the magnitude of the area of the parallelogram determined by vectors $\v{a}$ and $\v{b}$.
+\begin{enumerate}
+  \item Using the geometric definition of the cross product, find:
+  \begin{enumerate}
+    \item $\i\times\j$
+    \item $\j\times\k$
+    \item $\k\times\i$
+    \item $\j\times\i$
+    \item $\k\times\j$
+    \item $\i\times\k$
+  \end{enumerate}
+  \item Using the geometric definition of the cross product, what is the relationship between $\v{a}\times\v{b}$ and $\v{b}\times\v{a}$ for any two non-collinear, non-zero vectors $\v{a}$ and $\v{b}$?
+  \item Using the geometric definition of the cross product, what is $\v{a}\times k\v{a}$, where $k\neq 0$ is a scalar? Hint: What is a magnitude of $\v{a}\times k\v{a}$?
+  \item Let $\theta$ be the angle between vectors $\v{a}$ and $\v{b}$. Find an expression for $\|\v{a}\times\v{b}\|$ in terms of $\|\v{a}\|$, $\|\v{b}\|$, and $\theta$ using the geometric definition of the cross product. Hint: The area of a parallelogram is the product of the base length and the height of the parallelogram.
+\end{enumerate}
+It can be shown, using the geometric definition, that the cross product satisfies the following additional properties, where $\v{a}$, $\v{b}$ and $\v{c}$ are vectors in $\mathbb{R}^3$ and $k$ is a scalar:
+\begin{itemize}
+  \item $\v{a}\times(\v{b} + \v{c}) = \v{a}\times\v{b} + \v{a}\times\v{c}$
+  \item $(\v{a} + \v{b})\times\v{c} = \v{a}\times\v{c} + \v{b}\times\v{c}$
+  \item $k(\v{a}\times\v{b}) = (k\v{a})\times\v{b} = \v{a}\times(k\v{b})$
+\end{itemize}
+\begin{enumerate}[resume]
+  \item Let $\v{a}=a_1\i + a_2\j + a_3\k$ and $\v{b}=b_1\i + b_2\j + b_3\k$. Using the properties above find expressions for the components of $\v{a}\times\v{b}$ in terms of the components of vectors $\v{a}$ and $\v{b}$. Hint: start by using the distribution properties.
+\end{enumerate}
+\end{document}

@@ -1,0 +1,161 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 252}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 12}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\langle #1 \rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\usepackage{enumitem}
+\usepackage{subfig}
+
+\begin{document}
+\section*{Integration by Parts, continued}
+In this exploration we consider a few more examples of using integration by parts to evaluate indefinite integrals and introduce a definite integral version of the integration by parts formula used to evaluate definite integrals.
+
+In the problems below, you will need to solve an equation for an integral. For example, Solve the equation below for $\int f(x)\;dx$.
+\begin{equation*}
+  \int f(x)\;dx = x^2 e^x - \sin x - \int 3f(x)\;dx
+\end{equation*}
+\subsection*{Problems}
+Evaluate each integral
+\begin{enumerate}
+  \item $\int e^x \sin x\;dx$
+  \item $\int \sin(2t)\cos(t)\;dt$
+\end{enumerate}
+
+\subsection*{Integration by Parts: Definite Integral Version}
+The definite integral version of the integration by parts formula is
+\begin{equation*}
+  \int_a^b fg' = \left.(fg)\right|_a^b - \int_a^b f'g
+\end{equation*}
+Compare this formula with the indefinite integral version in Exploration 11. This formula allows us to trade in one definite integral, which may be difficult, with another definite integral, which may be simpler.
+\subsection*{Examples}
+Compare these examples with those in Exploration 11.
+\begin{enumerate}
+  \item Consider $\int_0^{\pi} 2x \cos x\;dx = \int_0^{\pi} 2x (\sin x)'\;dx$. Using the integration by parts formula we have
+  \begin{align*}
+    \int_0^{\pi} 2x (\sin x)'\;dx &= \left.(2x \sin x)\right|_0^{\pi} - \int_0^{\pi} (2x)' \sin x\;dx\\
+    &= \left.(2x \sin x)\right|_0^{\pi} - \int_0^{\pi} 2\sin x\;dx\\
+    &= \left.(2x \sin x)\right|_0^{\pi} + \left.(2\cos x)\right|_0^{\pi}\\
+    &= 2\pi\sin\pi + 2\cos\pi - 2\cos 0\\
+    &= 0 + 2(-1) - 2(1)\\
+    &= -4
+  \end{align*}
+  \item Consider $\int_1^e \ln x\;dx = \int_1^e \ln x (x)'\;dx$. Using the integration by parts formula we have
+  \begin{align*}
+    \int_1^e \ln x (x)'\;dx &= \left.(x\ln x)\right|_1^e - \int_1^e (\ln x)' x\;dx\\
+    &= \left.(x\ln x)\right|_1^e - \int_1^e\frac{1}{x} \cdot x\;dx\\
+    &= \left.(x\ln x)\right|_1^e - \int_1^e 1\;dx\\
+    &= \left.(x\ln x)\right|_1^e - \left.(x)\right|_1^e\\
+    &= e\ln e - 1\ln 1 - (e - 1)\\
+    &= e - e + 1\\
+    &= 1
+  \end{align*}
+\end{enumerate}
+\subsection*{Problems}
+Using the integration by parts formula for definite integrals, evaluate each definite integral.
+\begin{enumerate}
+  \item $\int_0^1 4x e^x\;dx$
+  \item $\int_0^{2\pi/3} x \sin x\;dx$
+\end{enumerate}
+
+\end{document}

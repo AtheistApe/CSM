@@ -1,0 +1,131 @@
+\documentclass[10pt,letterpaper,fleqn]{article}
+\pagenumbering{gobble}
+
+\usepackage{amsmath}
+\usepackage{tmmaths}
+\usepackage{tikz}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{paralist}
+\usepackage{multicol}
+
+\graphicspath{{/Users/gary/Documents/CSM/Fall2013/math222/Graphics/}}
+\DeclareGraphicsExtensions{.ps,.eps,.png}
+
+\usepackage[total={7.25in,10in},top=0.25in,left=0.5in,includehead]{geometry}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\lhead{Math 252}
+\chead{\LARGE Integration Review for Exam 2}
+% \rhead{\large Name\makebox[2in]{\hrulefill}}
+\lfoot{}
+% \cfoot{}
+% \rfoot{\thepage\}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcommand{\ds}{\displaystyle}
+\renewcommand{\deg}{\ensuremath{{}^\circ}}
+
+\newcommand{\myint}[1]{\mbox{\ensuremath{\ds\int #1\;dx}}}
+\usepackage{setspace}
+\usepackage{paralist}
+\begin{document}
+\noindent
+For problems solved by trig substitution, write your final answers without expressions like $\sin(\arctan(x/3))$ but instead write $\frac{x}{\sqrt{x^2 + 9}}$.
+\section*{Problems}
+% \begin{inparaenum}[\hspace{2em}(1)]
+ \begin{multicols}{4}
+  \begin{enumerate}
+   \begin{spacing}{3.5}
+ \item \myint{e^3}
+ \item \myint{\frac{x + x^{2/3}}{x}}
+ \item \myint{\sin^2 x + \cos^2 x}
+ \item \myint{\sin^2 x}
+ \item \myint{\ln x}
+ \item \myint{\frac{x}{\sqrt{1 + x^2}}}
+ \item \myint{x e^x}
+ \item \myint{e^x \cos x}
+ \item $\ds\int_0^4\frac{1}{\sqrt{x} (1 + \sqrt{x})^2}\;dx$
+ \item \myint{\sqrt[3]{8x^7}}
+ \item \myint{\tan x}
+ \item \myint{3^x \cdot x^2}
+ \item \myint{\frac{1}{x^2 + 2x}}
+ \item \myint{\frac{1}{x - x\ln x}}
+ \item \myint{\frac{\sin(27/x)}{35x^2}}
+ \item \myint{\frac{e^{2x}}{e^{4x} + 1}}
+ \item \myint{\cos(\sqrt{x})}
+ \item \myint{e^{e^x + x}}
+ \item \myint{x^2 \sin x}
+ \item \myint{3x \sec^2(4x)}
+ \item \myint{\frac{1}{\sqrt{4x^2 + 9}}}
+ \item $\ds\int_{\pi/6}^{\pi/2} \cos^3 x\;dx$
+ \item \myint{\frac{x^2 + x + 1}{x + 1}}
+ \item \myint{\sec x}
+ \item $\ds\int_0^{3\pi/2} \frac{\cos x}{2 - \sin x}\;dx$
+ \item \myint{\tan^3(x) \sec^5(x)}
+ \item $\ds\int_{-1}^0 \frac{9x^2 + 12x + 7}{9x^2 + 12x + 4}\;dx$
+ \item \myint{\frac{2x + 1}{(x + 5)^{100}}}
+ \item \myint{(x + 3)^{75} (x + 2)}
+ \item \myint{\frac{\sqrt{1 - (\ln x)^2}}{x}}
+ \item \myint{\frac{\sec^2 x}{(1 + \tan x)^2}}
+ \item \myint{\frac{(1 - x^2)^{3/2}}{x^6}}
+ \item \myint{\tan^2 x}
+ \item $\ds\int_0^2 \frac{1}{x^2 - 2x + 2}\;dx$
+ \item \myint{\cos(x)\cot(x)}
+ \item $\ds\int_0^2 \sqrt{12 - 3x^2}\;dx$
+   \end{spacing}
+  \end{enumerate}
+ \end{multicols}
+% \end{inparaenum}
+\newpage
+\section*{Answers}
+\begin{multicols}{3}
+ \begin{enumerate}
+  \begin{spacing}{1.5}
+  \item $xe^3 + C$
+  \item $\frac{x^2}{6} + x + C$
+  \item $x + C$
+  \item $\frac{1}{2}x - \frac{1}{4}\sin 2x + C$
+  \item $x\ln x - x + C$
+  \item $\sqrt{1 + x^2} + C$
+  \item $xe^x - e^x + C$
+  \item $\frac{1}{2}e^x(\sin x + \cos x) + C$
+  \item $\frac{4}{3}$
+  \item $\frac{3}{5}x^{10/3} + C$
+  \item $\ln|\sec x| + C$
+  \item $3^x\left(\frac{x^2}{\ln 3} - \frac{2x}{(\ln 3)^2} + \frac{2}{(\ln 3)^3}\right) + C$
+  \item $\frac{1}{2}\ln\left|\frac{x}{x+2}\right| + C$
+  \item $-\ln|1 - \ln x| + C$
+  \item $\frac{1}{945}\cos\left(\frac{27}{x}\right) + C$
+  \item $\frac{1}{2}\arctan(e^{2x}) + C$
+  \item $2\left(\sqrt{x}\sin\sqrt{x} + \cos\sqrt{x}\right) + C$
+  \item $e^{e^x} + C$
+  \item $-x^2\cos x + 2x\sin x + 2\cos x + C$
+  \item $\frac{3}{4}\left(x\tan 4x + \frac{1}{4}\ln|\cos 4x|\right) + C$
+  \item $\frac{1}{2}\ln\left|\frac{2}{3}x + \sqrt{1 + \frac{4}{9}x^2}\right| + C$
+  \item $\frac{5}{24}$
+  \item $\frac{1}{2}x^2 + \ln|x+1| + C$
+  \item $\ln|\sec x + \tan x| + C$
+  \item $\ln\left(\frac{2}{3}\right)$
+  \item $\frac{1}{7}\sec^7 x - \frac{1}{5}\sec^5 x + C$
+  \item $-\frac{1}{2}$
+  \item $-\frac{1}{49(x+5)^{98}} + \frac{1}{11(x+5)^{99}} + C$
+  \item $\frac{1}{77}(x+3)^{77} - \frac{1}{76}(x+3)^{76} + C$
+  \item $\frac{1}{2}\arcsin(\ln x) + \frac{1}{2}\ln x\sqrt{1 - \ln^2 x} + C$
+  \item $-\frac{1}{1 + \tan x} + C$
+  \item $-\frac{1}{5}\left(\frac{\sqrt{1 - x^2}}{x}\right)^5 + C$
+  \item $\tan x - x + C$
+  \item $\frac{\pi}{2}$
+  \item $\cos x - \ln|\csc x - \cot x| + C$
+  \item $\pi\sqrt{3}$
+ \end{spacing}
+ \end{enumerate}
+\end{multicols}
+\end{document}

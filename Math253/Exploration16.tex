@@ -1,0 +1,135 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 253}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 16}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\pmb{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+\renewcommand{\deg}{\ensuremath{{}^\circ}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+\newcommand{\proj}[2]{\ensuremath{\text{proj}_{\v{#2}}\v{#1}}}
+
+\usepackage{enumitem}
+
+\begin{document}
+\section*{The curvature $\pmb{\kappa}$ of a curve}
+We have seen that the position $\vec{r}$ on a curve $C$ can be described in terms of the time $t$ travelling along the curve as $\vec{r}(t)$ or in terms of the distance $s$ moving on the curve as $\vec{r}(s)$. We can convert between these different descriptions of position using the relation
+\begin{equation*}
+ s = \int_a^t \|\vec{r}'(\tau)\|\;d\tau
+\end{equation*}
+if we can solve it for $t$ in terms of $s$ (which is usually difficult if not impossible).
+
+In addition to position along a curve, we would like to know how ``bendy'' the curve is at different places on the curve. We can get a measure of this ``bendiness'' (the curvature $\kappa$ of the curve) by comparing the change in the direction of a tangent vector to the curve as we move a small distance along the curve; The more the direction of the tangent vector changes for a given small change in distance, the more bendy is the curve.
+
+This change in the direction of the tangent vector can be measured as the change in the angle $\Delta\theta$ of the tangent vector over a small change in distance $\Delta s$ moved along the curve. We define the curvature $\kappa$ of the curve at a point $\vec{r}(s)$ on the curve as
+\begin{equation}
+ \kappa = \lim_{\Delta s\to 0}\frac{\Delta\theta}{\Delta s} = \frac{d\theta}{ds}\label{eqn1}
+\end{equation}
+We showed in class that if position $\vec{r}$ on the curve is parameterized in terms of the distance $s$ moved along the curve then we can calculate $\kappa$ by
+\begin{equation}
+ \kappa = \|\vec{r}''(s)\|\label{eqn2}
+\end{equation}
+This is fine as long as we can reparameterize a curve $\vec{r}(t)$ in terms of $s$, but (as mentioned above) this can be difficult if not impossible. Fortunately, there are formulas for $\kappa$ using a time parameterization of $\vec{r}$.
+\begin{align}
+  \kappa &= \frac{\|\vec{\hat{T}}'(t)\|}{\|\vec{r}'(t)\|}\quad\text{or}\label{eqn3}\\[1.25ex]
+  \kappa &= \frac{\|\vec{r}'(t)\times\vec{r}''(t)\|}{\|\vec{r}'(t)\|^3}\label{eqn4}
+\end{align}
+\subsection*{Problems}
+\begin{enumerate}
+  \item Using formula (\ref{eqn1}) find $\kappa$ for a circle of radius $a$.
+  \item A circular helix of radius $a$ with axis along the $z$ axis is parameterized by $\vec{r}(t) = \lv{a\cos t, a\sin t, bt}$, where $b$ determines the distance between consecutive coils of the helix. Use formula (\ref{eqn4}) to find the curvature $\kappa$ of the helix in terms of $a$ and $b$.
+  \item A parameterization of the parabola $y = x^2$ is $\vec{r}(t) = \lv{t, t^2}$. It is difficult (possibly impossible) to reparameterize this curve in terms of $s$. Use formula (\ref{eqn4}) to find the curvature $\kappa$ of the parabola. (Note: in order to calculate the cross product, you will have to include a zero $z$ component in $\vec{r}(t)$.)
+\end{enumerate}
+\end{document}

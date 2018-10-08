@@ -1,0 +1,4 @@
+import sympy
+import sympytex
+sympytex.openout('Math252_F18_exam1_makeup')
+sympytex.endofdoc()

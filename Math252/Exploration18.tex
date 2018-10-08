@@ -1,0 +1,166 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 252}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 18}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\langle #1 \rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\usepackage{enumitem}
+\usepackage{subfig}
+
+\newcommand{\dint}{\ensuremath{\displaystyle\int}}
+
+\begin{document}
+\section*{Integration of Rational Functions, Part 2}
+We saw in exploration 17 that any proper rational function $p(x)/q(x)$ can be expressed as a sum of ``partial fractions'' where the denominators of those fractions are built from the linear and irreducible quadratic factors of $q(x)$. In writing the partial fraction decomposition of $p(x)/q(x)$, we are left with a large number of undetermined constants that must be found. In this exploration we will learn how to find the values of these constants.
+
+Suppose we have decomposed the proper rational function $p(x)/q(x)$ into the sum of its partial fractions
+\begin{equation*}
+ \frac{p(x)}{q(x)} = (\text{sum of partial fractions})
+\end{equation*}
+Multiplying both sides of this equation by $q(x)$ gives
+\begin{equation*}
+ p(x) = (\text{sum of partial fractions})\,q(x)
+\end{equation*}
+Because of the nature of the partial fraction decomposition of $p(x)/q(x)$, the expression on the right hand side of this equation is a polynomial $r(x)$. The polynomial $p(x)$ equals the polynomial $r(x)$ if and only if all the coefficients of the different powers of $x$ in $p(x)$ match the coefficients of the corresponding powers of $x$ in $r(x)$.
+
+By equating the coefficients of corresponding powers in the polynomials $p(x)$ and $r(x)$, we get a system of linear equations in the undetermined constants.\footnote{The partial fraction decomposition of $p(x)/q(x)$ guarantees that there will be the same number of linearly independent equations as there are undetermined constants, thereby insuring a unique solution of the system.} Solving this system determines the values of these constants, thereby determining the partial fraction decomposition of $p(x)/q(x)$.
+\subsection*{Example}
+Consider the partial fraction decomposition of the proper rational function
+\begin{equation*}
+ \frac{x^2}{(x-1)(x^2 + 1)} = \frac{A}{x-1} + \frac{Bx + C}{x^2 + 1}
+\end{equation*}
+where $A$, $B$, and $C$ are the undetermined constants.
+
+Multiplying through by $(x-1)(x^2 + 1)$ gives
+\begin{align*}
+ x^2 & = \left(\frac{A}{x-1} + \frac{Bx + C}{x^2 + 1}\right)(x-1)(x^2 + 1) \\[1ex]
+     & = A(x^2 + 1) + (Bx + C)(x-1)                                        \\[1ex]
+     & = Ax^2 + A + Bx^2 - Bx + Cx - C                                     \\[1ex]
+     & = (A + B)x^2 + (C - B)x + (A - C)
+\end{align*}
+Equating the coefficients of $x^2$, $x$, and the constants on both sides of the equation gives us a system of three linear equations in the three undetermined constants $A$, $B$, and $C$
+\begin{align}
+ A + B & = 1                \\
+ C - B & = 0 \implies C = B \\
+ A - C & = 0 \implies A = C
+\end{align}
+From equations (2) and (3) we see that $A = B = C$. Therefore, equation (1) implies that $2A = 1$, hence $A = B = C = 1/2$.\footnote{There are methods in linear algebra using matrices that makes solving a system of $n$ equations in $n$ unknowns a simple mechanical procedure.} Thus, we have determined that
+\begin{equation*}
+ \frac{x^2}{(x-1)(x^2 + 1)} = \frac{1}{2}\cdot\frac{1}{x-1} + \frac{1}{2}\cdot\frac{x + 1}{x^2 + 1}
+\end{equation*}
+\subsection*{Problem}
+\begin{enumerate}
+ \item Evaluate $\displaystyle\int\frac{x^2}{(x-1)(x^2 + 1)}\;dx$
+\end{enumerate}
+\subsection*{Problems}
+Find the partial fraction decomposition of each of the following proper rational functions. Solve a system of linear equations to find the values of the undetermined constants as in the previous example.
+\begin{enumerate}[resume]
+ \item $\dfrac{x - 1}{x^2 - 9}$
+ \item $\dfrac{x - 7}{x^2 - 2x - 3}$
+ \item $\dfrac{6x + 2}{4x^2 + 4x + 1}$
+ \item $\dfrac{3x^3 - 8}{x^4 + 4x^2}$
+\end{enumerate}
+\subsection*{Problems}
+Integrate each of the rational functions in problems (2)--(5).
+
+\end{document}

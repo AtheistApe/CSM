@@ -1,0 +1,4 @@
+import sympy
+import sympytex
+sympytex.openout('Exploration_1')
+sympytex.endofdoc()

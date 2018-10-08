@@ -1,0 +1,4 @@
+import sympy
+import sympytex
+sympytex.openout('Exam2Rev_Extra')
+sympytex.endofdoc()

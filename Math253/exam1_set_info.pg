@@ -1,0 +1,115 @@
+# ASimpleCombinedHeaderFile.pg
+# This header file can be used for both the screen and hardcopy output
+
+
+DOCUMENT();
+
+loadMacros(
+	"PG.pl",
+	"PGbasicmacros.pl",
+	"PGcourse.pl",
+        "PGML.pl",
+);
+
+TEXT($BEGIN_ONE_COLUMN);
+
+####################################################
+#
+# The item below printed out only when a hardcopy is made.
+#
+####################################################
+
+
+
+TEXT(MODES(TeX =>EV3(<<'EOT'),HTML=>""));
+
+\noindent {\large \bf $studentName}
+\hfill
+{\large \bf {\{protect_underbar($courseName)\}}}
+% Uncomment the line below if this course has sections. Note that this is a comment in TeX mode since this is only processed by LaTeX
+%   {\large \bf { Section: \{protect_underbar($sectionName)\} } }
+\par
+\noindent{\large \bf {Assignment \{protect_underbar($setNumber)\}  due $formatedDueDate}}
+\par\noindent \bigskip
+% Uncomment and edit the line below if this course has a web page. Note that this is a comment in TeX mode.
+%See the course web page for information http://yoururl/yourcourse
+
+EOT
+
+####################################################
+#
+# End of hardcopy only output.
+#
+####################################################
+
+
+####################################################
+#
+# The items below are printed out only when set is displayed on screen
+#
+####################################################
+TEXT(MODES(TeX =>"",HTML=>EV3(<<'EOT')));
+
+$BBOLD WeBWorK  Assignment \{ protect_underbar($setNumber) \}  is due :  $formattedDueDate. $EBOLD
+$PAR
+Here's the list of
+\{ htmlLink(qq!http://webwork.maa.org/wiki/Available_Functions!,"functions and symbols") \}
+ which WeBWorK understands.
+$BR
+EOT
+
+####################################################
+# Uncomment and edit the lines below if this course has a web page. Note that this is comment in Perl mode.
+# IMPORTANT: Make sure the EOT at the bottom is at the beginning of a line with no spaces preceeding it.
+#TEXT(MODES(TeX =>"",HTML=>EV3(<<'EOT')));
+#See the course web page for information \{ htmlLink(qq!http://yoururl/yourcourse!,"your course name") \}
+#EOT
+####################################################
+
+####################################################
+#
+# End of screen only output.
+#
+####################################################
+
+####################################################
+#
+# Anything between the BEGIN_TEXT AND END_TEXT lines
+# will be printed in both screen and hardcopy output
+#
+####################################################
+
+BEGIN_PGML
+
+**For exam 1, you should:**
+
+## 
+
+1. Use the various formulas and properties of antiderivatives (indefinite integrals) to find the antiderivatives of basic functions.
+2. Use the substitution method to find the antiderivatives of more complicated functions.
+
+## Areas and Definite Integrals
+
+1. Find the area bounded by the graph of a function [`y = f(x)`] and the [`x`]-axis over an interval [`[a, b]`] by evaluating one or more definite integrals of the function [`f`].
+2. Determine the value of an integral [`\int_a^b f(x)\;dx`] using the areas bounded by the graph of [`f`] and the [`x`]-axis over the interval [`[a, b]`].
+3. Determine the area bounded between the graphs of two functions [`f(x)`] and [`g(x)`] by evaluating one or more definite integrals involving these functions. You may have to determine the limits of integration by solving a system of equations involving these functions.
+
+## Volumes and Definite Integrals
+
+1. Find the volumes of solids knowing the base shape and the shapes of cross-sections perpendicular to the base by evaluating a definite integral.
+2. Be able to set up (and possibly evaluate) a definite integral to find the volume of a solid of revolution about some axis using disks/rings and/or cylindrical shells.
+
+## Average Value of a Function and Definite Integrals
+
+Find the average value of a function [`y = f(x)`] over some interval [`[a, b]`] using a definite integral.
+
+## The Physics Concept of Work
+
+1. Use a definite integral to find the work done by a force [`F`] in displacing an object a distance [`d`] along the direction of the force. For example, the force might be a spring force [`F(x) = kx`], where [`k > 0`] is the spring constant.
+2. Use a definite integral to find the work done in pumping a liquid out from the top of some tank.
+
+END_PGML
+
+TEXT($END_ONE_COLUMN);
+
+ENDDOCUMENT();        # This should be the last executable line in the problem.

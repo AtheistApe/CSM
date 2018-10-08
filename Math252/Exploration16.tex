@@ -1,0 +1,152 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 252}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 16}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\langle #1 \rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\usepackage{enumitem}
+\usepackage{subfig}
+
+\newcommand{\dint}{\ensuremath{\displaystyle\int}}
+
+\begin{document}
+\section*{Review for Quiz on Integration by Parts and Trig.\ Integrals}
+Each of the integrals below can be resolved using either (or a combination of) integration by parts, substitution, trig.\ identities or the special cases described in exploration 14.\\[1.5ex] For the quiz you should know (memorize) the integrals of the six trig.\ functions and the following trig.\ identities:
+\begin{itemize}
+  \item $\sin^2 x + \cos^2 x = 1$
+  \item $\tan^2 x + 1 = \sec^2 x$
+  \item $\sin(2x) = 2\sin x \cos x$
+  \item $\cos^2 x = \frac{1}{2}\left(1 + \cos 2x\right)$
+  \item $\sin^2 x = \frac{1}{2}\left(1 - \cos 2x\right)$
+\end{itemize}
+\subsection*{Problems}
+Evaluate each of the following integrals without using a calculator. You \emph{must} show your work.
+\begin{enumerate}
+  \item $\dint 3x e^{2x}\;dx$
+  \item $\dint \sin^5 y\cos y\;dy$
+  \item $\dint_1^e 2u \ln u\;du$
+  \item $\dint_0^{\pi/4}\tan^2 \theta\;d\theta$
+  \item $\dint 2x\sec 3x\tan 3x\;dx$
+  \item $\dint \sin^2 x\;dx$
+  \item $\dint_0^{2\pi} t^2\sin 2t\;dt$
+  \item $\dint \left(\tan^2 x + \tan^4 x\right)\;dx$
+  \item $\dint \cot x \cos^2 x\;dx$
+  \item $\dint \sec^4\theta \tan\theta\;d\theta$
+\end{enumerate}
+\newpage
+\subsection*{Answers}
+Below are answers to the problems on the reverse side of this page:
+\begin{enumerate}
+  \item $\dfrac{3}{2} e^{2x}\left(x - \dfrac{1}{2}\right) + C$
+  \item $\dfrac{1}{6}\sin^6 y + C$
+  \item $\dfrac{1}{2}(1 + e^2)$
+  \item $1 - \dfrac{\pi}{4}$
+  \item $\dfrac{2}{3} x\sec 3x - \dfrac{2}{9}\ln\left|\sec 3x + \tan 3x\right| + C$
+  \item $\dfrac{1}{2}x - \dfrac{1}{4}\sin 2x + C$
+  \item $-2\pi^2$
+  \item $\dfrac{1}{3}\tan^3 x + C$
+  \item $\ln\left|\sin x\right| - \dfrac{1}{2}\sin^2 x + C$
+  \item $\dfrac{1}{4}\sec^4\theta + C$
+\end{enumerate}
+
+\end{document}
