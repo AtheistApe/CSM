@@ -1,0 +1,163 @@
+\documentclass[12pt,letterpaper,fleqn]{article}
+
+%       amslatex provides nice math extensions for typesetting mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tmmaths}
+\usepackage{sympytex}
+
+%       pstricks provides powerful environments for incorporating postscript into a
+%       TeX/LaTeX document. You must have a postscript printer and a package like
+%       dvips to convert the DVI file to a PS file.
+%\usepackage{pst-all}
+%\usepackage{pstricks,pst-plot}
+%\usepackage{pst-coil,pst-node}
+
+%  This package provides native tex support for numbered grids. The syntax is:
+%  \graphpaper[spc](x_lowleft,y_lowleft)(x_upperright,y_upperright)
+
+%\usepackage{graphpap}
+%\usepackage{float}
+
+%  The package below must be initialized with "\initfloatingfigs" immediately after the
+%  "\begin{document} command.
+%\usepackage{floatfig}
+
+\usepackage{graphicx}
+\graphicspath{{i:/mytex/graphics}}
+\DeclareGraphicsExtensions{.ps,.eps}
+
+%       tst is a package for the creation of exams, quizzes and tests. the include
+%       file mathstuf (see below) provides many abbreviations for these environments.
+%\usepackage{tst}
+
+%       epsfig is a package which provides for the inclusion of Encapsulated PostScript
+%       files in a document.
+%\usepackage{epsfig}
+%\usepackage{epic,eepic}
+\include{mathstuf}
+\usepackage[total={7.25in,10in},top=0.25in,left=0.75in,includehead]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Math 252}
+\rhead{\large Name\makebox[2in]{\hrulefill}}
+\chead{\LARGE Exploration 22}
+%\lfoot{\today}
+\cfoot{}
+%\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+\newcounter{tf}[enumi]
+\newenvironment{tf}[0]{\begin{list}%
+{\alph{tf}. \makebox[5em]{True\hfill False}}%
+{\usecounter{tf}\setlength{\labelwidth}{7em}%
+\setlength{\leftmargin}{3.5cm}%
+\setlength{\labelsep}{1cm}}}%
+{\end{list}}
+
+%\usepackage{epic,eepic}
+\newcommand{\numline}{%
+%\newcounter{mark}%
+%\setcounter{mark}{-1}%
+\setlength{\unitlength}{0.1in}%
+\begin{picture}(0,0)%
+\thicklines%
+\put(0,0){\line(1,0){60}}%
+\multiput(0,0)(10,0){7}{\line(0,-1){1}%
+\makebox(0,-1.5)[t]{\arabic{mark}}\stepcounter{mark}}%
+%
+\thinlines%
+\multiput(0,0)(5,0){12}{\line(0,-1){0.5}}%
+\multiput(0,0)(1,0){60}{\line(0,-1){0.3}}%
+%\put(-5,265){\makebox(0,0)[l]{{\bf cm}}}%
+\end{picture}}%
+
+\newcommand{\ds}{\displaystyle}
+\usepackage{amsfonts}
+
+
+\let\oldhat\hat
+\renewcommand{\hat}[1]{\oldhat{\boldsymbol{\mathbf{#1}}}}
+\newcommand{\lv}[1]{\ensuremath{\langle #1 \rangle}}
+\renewcommand{\i}{\ensuremath{\hat{\imath}}}
+\renewcommand{\j}{\ensuremath{\hat{\jmath}}}
+\renewcommand{\k}{\ensuremath{\mathbf{\oldhat{k}}}}
+\newcommand{\ora}[1]{\ensuremath{\overrightarrow{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\renewcommand{\v}[1]{\ensuremath{\vec{#1}}}
+\newcommand{\abs}[1]{\ensuremath{\lvert #1 \rvert}}
+
+\usepackage{tabularx}
+\usepackage{paralist}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+% \newcommand{\ans}[1]{\quad\fbox{answer: \red{#1}}}
+\newcommand{\ans}[1]{\mbox{{\bf Ans:} \blue{#1}}}
+\newcommand{\dd}[2][]{\ensuremath{\frac{\text{d}#1}{\text{d}#2}}}
+\newcommand{\eval}[2]{\ensuremath{\left.#1\right|_{#2}}}
+
+\usepackage{amsthm}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+
+\usepackage{enumitem}
+\usepackage{subfig}
+
+\newcommand{\dint}{\ensuremath{\displaystyle\int}}
+
+\begin{document}
+\section*{More Improper Integrals}
+% The Fundamental Theorem of Calculus allows us to evaluate definite integrals of \emph{continuous functions} defined over \emph{closed, bounded\footnote{Intervals of finite length which include both endpoints.} intervals} (assuming we can find an antiderivative of the integrand).
+%
+% We can use limiting concepts to extend our notion of the definite integral to:
+% \begin{enumerate}
+%   \item Continuous functions defined over unbounded intervals of the type:
+%   \begin{enumerate}
+%     \item $[a, +\infty)$
+%     \item $(-\infty, b]$
+%     \item $(-\infty, \infty)$
+%   \end{enumerate}
+%   \item Functions defined over bounded intervals with discontinuities\footnote{Usually infinite discontinuities.} within the interval of integration or at the endpoints of the interval of integration.
+% \end{enumerate}
+% We do this by picking a variable (called a ``parameter'') within the interval, use this parameter as one endpoint of a closed, bounded interval over which the function is continuous
+For some of these problems you might find L'H\^opital's rule helpful to evaluate limits.
+\subsection*{L'H\^opital's Rule}
+Suppose $f(x)$ and $g(x)$ are functions with either:
+\begin{itemize}
+  \item $f(x)\to 0$ and $g(x)\to 0$ as $x\to a$, or
+  \item $f(x)\to\pm\infty$ and $g(x)\to\pm\infty$ as $x\to a$
+\end{itemize}
+then
+\begin{equation*}
+  \lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}
+\end{equation*}
+These quotients $f(x)/g(x)$ are called ``indeterminate quotients'' of type $0/0$ and $\infty/\infty$, respectively.
+
+An indeterminate product $f(x)g(x)$ of type $0\cdot\infty$ (where one factor approaches $0$ as $x\to a$ and the other factor approaches $\infty$ as $x\to a$) can be turned into an indeterminate quotient by dividing one factor by the reciprocal of the other.
+\subsection*{Problems}
+\begin{enumerate}
+\item Determine if the integral converges or diverges. If it converges, find its (limiting) value.
+\begin{enumerate}
+  \item $\ds\int_{-2}^3 \frac{1}{x^4}\;dx$
+  \item $\ds\int_1^\infty xe^{-x}\;dx$
+  \item $\ds\int_{-\infty}^{\infty}xe^{-x^2}\;dx$
+  \item $\ds\int_0^1 x\ln x\;dx$
+  \item $\ds\int_0^9 \frac{1}{\sqrt[3]{x-1}}\;dx$
+\end{enumerate}
+\item Find the values of $a$ for which the integral $\ds\int_0^\infty e^{ax}\cos x\;dx$ converges. Evaluate the integral for those values of $a$.
+\end{enumerate}
+\newpage
+\subsection*{Answers}
+\begin{enumerate}
+  \item[1a.] Diverges
+  \item[1b.] Converges to $2/e$
+  \item[1c.] Converges to $0$
+  \item[1d.] Converges to $-1/4$
+  \item[1e.] Converges to $9/2$
+  \item[2.\hspace{0.5em}] Converges to $\dfrac{-a}{1+a^2}$ if $a < 0$. Does not converge if $a\geq 0$.
+\end{enumerate}
+\end{document}
