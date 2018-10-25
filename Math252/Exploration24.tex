@@ -109,6 +109,12 @@
 
 \newcommand{\dint}{\ensuremath{\displaystyle\int}}
 
+\usepackage{amsthm}
+\newtheorem*{theorem}{Theorem}
+
+% \theoremstyle{defintion}
+% \newtheorem*{definition}{Definition}
+
 \begin{document}
 \section*{Convergent and Divergent Sequences}
 A sequence $a_n$ is convergent if there exists a number $L$ such that $\lim_{n\to\infty} a_n = L$. We say that the sequence converges to $L$. If the sequence is not convergent (no such limiting number $L$ exists), we say that the sequence is divergent.
@@ -116,13 +122,51 @@ A sequence $a_n$ is convergent if there exists a number $L$ such that $\lim_{n\t
 We say a sequence $a_n$ diverges to $\pm\infty$ if $\lim_{n\to\infty} a_n = \pm\infty$.
 
 Since sequences are (discontinuous) functions, we can apply all the limit laws of functions from first semester calculus to sequences\footnote{As long as those laws don't rely on the continuity of the functions.}.
+
+A sequence \emph{eventually} satisfies a condition if there is a position $N$ in the sequence for which the condition is satisfied for all $n > N$.\footnote{The terms of the sequence before position $N$ are the ``head'' of the sequence, those after are the ``tail''; Convergence or divergence depend on what happens in the tail of the sequence.} For example, consider
+\theorem[Squeeze Theorem]
+  If $a_n\to L$ as $n\to\infty$ and $b_n\to L$ as $n\to\infty$ and \emph{eventually} $a_n\leq c_n\leq b_n$, then $c_n\to L$ as $n\to\infty$.
+
+There are many theorems about convergence that apply only to sequences of (eventually) positive terms. This makes the following result\footnote{This is easily proved using the Squeeze Theroem} particularly important
+
+\theorem If $|a_n|\to 0$ as $n\to\infty$, then $a_n\to 0$ as $n\to\infty$.
+
+Geometric sequences $a_n = r^n$ (increasing powers of some constant $r$) will also play an important role in what is to follow. The following theorem is proved in section 11.1 of the text.
+
+\theorem[Geometric Sequences] The sequence $a_n = r^n$ is convergent if $-1 < r\leq 1$ and divergent for all other values of $r$. For those values of $r$ for which the sequence converges, we have
+  \begin{equation*}
+    \lim_{n\to\infty} r^n = \begin{cases}
+      0 &\text{if}\quad -1 < r < 1\\
+      1 &\text{if}\quad r = 1
+  \end{cases}
+  \end{equation*}
+
+\theoremstyle{definition}
+\begin{definition}[Increasing Sequence]
+  A sequence $a_n$ is \emph{increasing} if $a_n < a_{n+1}$
+\end{definition}
+\begin{definition}[Decreasing Sequence]
+  A sequence $a_n$ is \emph{decreasing} if $a_n > a_{n+1}$
+\end{definition}
+\begin{definition}[Monotone Sequence]
+  A sequence $a_n$ is \emph{monotone} if it is either increasing or decreasing.
+\end{definition}
+\begin{definition}[Bounded Sequence]
+  A sequence $a_n$ is \emph{bounded above} if there exists a number $M$ such that $a_n \leq M$, for all $n$. It is \emph{bounded below} if there exists a number $m$ such that $m \leq a_n$, for all $n$. It is \emph{bounded} if it is both bounded above and bounded below.
+\end{definition}
+Finally, an important theorem is
+\theorem[Monotone Sequence Theorem] Every bounded (eventually) monotonic sequence is convergent.
+\newpage
 \subsection*{Problems}
 Determine if the following sequences converge or diverge. If the sequence converges, give its limiting value. If the sequence diverges to $\pm\infty$, state so. If the sequence diverges but not to $\pm\infty$, just say that it diverges.
 \begin{enumerate}
   \item $a_n = \dfrac{2n^2}{3n^2-50n+8000}$
   \item $a_n = \dfrac{30n^2+12n-6}{3n^3}$
   \item $a_n = \dfrac{5n^4+n^2+3}{n^3-n+1}$
-  \item $a_n = \dfrac{2^n}{3^n}$
-  \item $a_n = $
+  \item $a_n = 3^n\,7^{-n}$
+  \item $a_n = \dfrac{2^n - 5^n}{4^n}$
+  \item $a_n = e^{2n/(n+2)}$
+  \item $a_n = \cos\left(\dfrac{n\pi}{n+1}\right)$
+  \item $a_n = \ln(n+1) - \ln(n)$ Hint: Use a property of logarithms.
 \end{enumerate}
 \end{document}
